@@ -8,12 +8,14 @@ import { MatInputModule } from '@angular/material/input';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BannerComponent } from './banner/banner.component';
+import { ContentComponent } from './content/content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    BannerComponent
+    BannerComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,
