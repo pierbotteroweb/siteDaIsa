@@ -1,38 +1,28 @@
-name: Angular Build
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-# {1}
+name: Angular CI
+
 on:
-  push:
-    branches: [ "develop" ]
-  pull_request:
-    branches: [ "develop" ]
+    push:
+        branches: [main, Angular11, Angular13, Angular14, release3.x ]
+    pull_request:
+        branches: [main, Angular11, Angular13, Angular14, release3.x ]
 
 jobs:
-  angular:
-    name: Angular Build
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [22.6.0]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-    steps:
-      # {2}
-      - name: Checkout the source code
-        uses: actions/checkout@v3
-      # {3}
-      - name: Setup Node.js $
-        uses: actions/setup-node@v3
-        with:
-        node-version: [22.6.0]
-          cache: 'npm'
-          cache-dependency-path: package-lock.json
+    build:
+        runs-on: ubuntu-latest
 
-      # {4}
-      - name: Install dependencies
-        run: npm ci
-      # {5}
-      - name: Run tests
-        run: npm run test:ci
-      # {6}
-      - name: Build
-        run: npm run build
+        strategy:
+            matrix:
+                node-version: [ 16, 18, 20]
+
+        steps:
+        - uses: actions/checkout@v3
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v3
+          with:
+              node-version: ${{ matrix.node-version }}
+        - run: npm install
+        - run: npm run build
+        - run: npm run test
