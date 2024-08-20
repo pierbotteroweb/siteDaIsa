@@ -5,9 +5,7 @@ name: Angular CI
 
 on:
     push:
-        branches: [main, Angular11, Angular13, Angular14, release3.x ]
-    pull_request:
-        branches: [main, Angular11, Angular13, Angular14, release3.x ]
+        branches: [banner ]
 
 jobs:
     build:
