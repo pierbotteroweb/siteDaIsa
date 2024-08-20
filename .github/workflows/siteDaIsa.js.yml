@@ -27,6 +27,9 @@ concurrency:
 
 jobs:
     build:
+    environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
         runs-on: ubuntu-latest
 
         strategy:
@@ -34,6 +37,7 @@ jobs:
                 node-version: [ 16 ]
 
         steps:
+        - name: Checkout
         - uses: actions/checkout@v3
         - name: Use Node.js ${{ matrix.node-version }}
           uses: actions/setup-node@v3
@@ -41,16 +45,6 @@ jobs:
               node-version: ${{ matrix.node-version }}
         - run: npm install
         - run: npm run build
-    
-    # Single deploy job since we're just deploying
-    deploy:
-    environment:
-        name: github-pages
-        url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-        - name: Checkout
-        uses: actions/checkout@v4
         - name: Setup Pages
         uses: actions/configure-pages@v5
         - name: Upload artifact
