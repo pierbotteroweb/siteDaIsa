@@ -10,8 +10,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Install dependencies
-      run: npm install
     - name: All things angular
       uses: pierbotteroweb/siteDaIsa@7f064022c21fc162fd24c75faa4684dbdc48a48d ## replace by latest version without it you will see Expected format {org}/{repo}[/path]@ref. Actual 'AhsanAyaz/angular-deploy-gh-pages-actions',Input string was not in a correct format.
       with:
@@ -20,6 +18,8 @@ jobs:
         base_href: /siteDaIsa/   # make sure this corresponds to https://<your_username>.github.io/<base_href>/
         deploy_branch: develop # The branch the action should deploy to.
         angular_dist_build_folder: dist/site-da-isa # The folder where your project is supposed to be after running ng build by the action.
+    - name: Install dependencies
+      run: npm install
 
 permissions:
   contents: write # Allow write permission to GITHUB_TOKEN to commit to deploy branch.
