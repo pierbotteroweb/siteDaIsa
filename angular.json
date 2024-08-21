@@ -75,7 +75,7 @@
           "options": {
             "disableHostCheck": true
           },
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular",
           "configurations": {
             "production": {
               "browserTarget": "siteDaIsa:build:production"
