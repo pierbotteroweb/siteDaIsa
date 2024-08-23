@@ -1,0 +1,32 @@
+name: Build and Deploy Script
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+    - name: Adding Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 12
+    - name: user.email
+      run: git config --global user.email "pierbotteroweb@gmail.com"
+    - name: user.name
+      run: git config --global user.name "pierbotteroweb"
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build Angular App
+      run: npm run build --no-silent
+    - name: Deploy to gh pages
+      run: |
+        npx angular-cli-ghpages --dir=dist/siteDaIsa --no-silent
+      env:
+        CI: true
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
