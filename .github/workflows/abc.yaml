@@ -2,7 +2,7 @@ name: Build and Deploy Script
 
 on:
   push:
-    branches: ["develop"]
+    branches: ["ngVersionFix"]
 
 jobs:
   build:
